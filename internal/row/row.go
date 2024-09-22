@@ -1,39 +1,25 @@
-package main
+package row
 
 import (
-	"fmt"
 	"math/rand"
-	"os"
 	"regexp"
 	"strconv"
 	"strings"
 )
 
-func main() {
-	diceSpec := os.Args[1]
-	rows, err := ParseString(diceSpec)
-	if err != nil {
-		panic(err)
-	}
-
-	for _, row := range rows {
-		fmt.Println(row.Roll())
-	}
-}
-
-type Die struct {
+type die struct {
 	sideCount int
 }
 
-func (d *Die)Roll() int {
+func (d *die)Roll() int {
 	return 1 + rand.Intn(d.sideCount)
 }
 
-type Row struct { 
-	dice []Die
+type row struct {
+	dice []die
 }
 
-func (r *Row)Roll() int {
+func (r *row)Roll() int {
 	sum := 0
 	for _, die := range r.dice {
 		sum += die.Roll()
@@ -41,10 +27,19 @@ func (r *Row)Roll() int {
 	return sum
 }
 
-func ParseString(s string) ([]Row, error) {
-	var rows []Row
+func RollRows(rows *[]row) string {
+	res := ""
+	for _, row := range *rows {
+		res += strconv.Itoa(row.Roll())
+		res += "\n"
+	}
+	return res
+}
+
+func ParseString(s string) ([]row, error) {
+	var rows []row
 	for _, line := range strings.Split(s, "\n") {
-		var row Row
+		var row row
 		for _, diceGroup := range strings.Fields(line) {
 			re := regexp.MustCompile(`(\d*)d(\d+)`)
 			matches := re.FindStringSubmatch(diceGroup)
@@ -58,7 +53,7 @@ func ParseString(s string) ([]Row, error) {
 			}
 
 			for range dieCount {
-				row.dice = append(row.dice, Die{ sideCount: sideCount})
+				row.dice = append(row.dice, die{ sideCount: sideCount})
 			}
 		}
 		rows = append(rows, row)

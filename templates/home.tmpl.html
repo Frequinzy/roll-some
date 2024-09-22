@@ -1,0 +1,24 @@
+{{ template "index" . }}
+<body>
+    <form>
+        <textarea
+            name="origin"
+            rows="10"
+            autofocus="on"
+            required="required"
+        ></textarea>
+        <button
+            hx-post="/rollSome"
+            hx-target="#result"
+            hx-swap="innerHTML"
+        >
+            Roll Some
+        </button>
+    </form>
+    <textarea
+        id="result"
+        rows="10"
+        readonly="readonly"
+        disabled="disabled"
+    ></textarea>
+</body>
