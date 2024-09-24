@@ -21,7 +21,6 @@ type row struct {
 	modifier int
 }
 
-	sum := 0
 func ParseRow(s string) (*row, error) {
 	var row row
 	for _, diceGroup := range strings.Fields(s) {
