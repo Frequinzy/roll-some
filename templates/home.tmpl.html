@@ -1,5 +1,6 @@
 {{ template "index" . }}
 <body>
+    <div class="flex-container">
     <form>
         <textarea
             name="origin"
@@ -21,4 +22,12 @@
         readonly="readonly"
         disabled="disabled"
     ></textarea>
+    </div>
 </body>
+
+<style>
+    .flex-container {
+        display: flex;
+        justify-content: center;
+    }
+</style>
