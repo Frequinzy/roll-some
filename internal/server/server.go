@@ -10,7 +10,7 @@ func NewMux() *http.ServeMux {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("GET /", getHome)
-	mux.HandleFunc("POST /rollSome", putRollSome)
+	mux.HandleFunc("POST /rollSome", postRollSome)
 
 	return mux
 }

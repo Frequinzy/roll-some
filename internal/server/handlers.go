@@ -12,8 +12,8 @@ func getHome(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "home", nil)
 }
 
-func putRollSome(w http.ResponseWriter, r *http.Request) {
-	log.Printf("PUT: Request for rollSome")
+func postRollSome(w http.ResponseWriter, r *http.Request) {
+	log.Printf("POST: Request for rollSome")
 
 	if err := r.ParseForm(); err != nil {
 		log.Print(err.Error())
